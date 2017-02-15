@@ -190,11 +190,6 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener,
     seekbarsession seekbarsession;
     DbHelpertopcat helpercat;
     Boolean isInternetPresent = false;
-    private List<String> lstid = null;
-    private List<String> lstname = null;
-    private List<String> lstimg = null;
-    private List<String> lstlat = null;
-    private List<String> lstlang = null;
     ImageView imgs,imgs1;
     String base=null;
     private LruCache<String, Bitmap> mMemoryCache;
