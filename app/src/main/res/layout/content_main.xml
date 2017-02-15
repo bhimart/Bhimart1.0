@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.Homepage"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#2091ff"
+        android:elevation="5dp">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/menubar"
+          android:background="@drawable/ic_menu_white_36dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/homepage"
+            android:id="@+id/searchlayout"
+            android:padding="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:layout_height="40dp"
+                android:background="#fff"
+                android:ems="10"
+                android:elevation="3dp"
+                android:hint="Search"
+                android:layout_marginLeft="9dp"
+                android:padding="4dp"
+                android:popupBackground="#ca161616"
+                android:layout_marginTop="5dp"
+                android:alpha="1">
+            </AutoCompleteTextView>
+
+        </LinearLayout>
+
+  <ImageView
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/image1"
+      android:background="@drawable/banner"
+      android:layout_below="@+id/searchlayout"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/image2"
+            android:layout_below="@+id/searchlayout"
+            android:layout_toRightOf="@+id/image1"
+            android:background="@drawable/banner2"/>
+
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:id="@+id/image3"
+            android:background="@drawable/shopping"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/image2"
+            android:layout_toEndOf="@+id/image2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BHIMART"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:id="@+id/homepage"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/menubar"
+            android:layout_toEndOf="@+id/menubar" />
+    </RelativeLayout>
+
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backwhite"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lin1"
+        android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Top Categories"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:textColor="#090a0a"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+
+            android:id="@+id/recyclecategory">
+        </android.support.v7.widget.RecyclerView>
+
+
+
+    </LinearLayout>
+
+        <View
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:background="#d1d2d2"/>
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:background="#FFFFFFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Top Products"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:textColor="#090a0a"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#FFFFFFFF"
+            android:id="@+id/recycleproduct">
+        </android.support.v7.widget.RecyclerView>
+   </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#d1d2d2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFFFF"
+                android:id="@+id/advertrecycle">
+            </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#d1d2d2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFFFF"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Top shops"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:textColor="#090a0a"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycleshop">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+   </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+</LinearLayout>

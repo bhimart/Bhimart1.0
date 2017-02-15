@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_login_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.LoginPage"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_login_page">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/in1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="150dp"
+        android:textColorHint="#101010"
+        android:textColor="#101010">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phonenumber"
+            android:inputType="phone"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"
+            android:hint="Phone Number"
+            android:backgroundTint="#25303f"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/in2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#101010"
+        android:layout_marginTop="30dp"
+        android:textColor="#101010">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/pass"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:hint="Password"
+            android:backgroundTint="#25303f"/>
+
+    </android.support.design.widget.TextInputLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/forgot"
+    android:textSize="18sp"
+    android:gravity="end"
+    android:layout_marginRight="8dp"
+    android:textColor="#2292ff"
+    android:text="Forgot Password?"/>
+
+  <!--  <Button
+        android:layout_width="300dp"
+        android:elevation="5dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:text="submit"
+        android:textSize="20sp"
+        android:background="@drawable/roundbutton1"
+        android:id="@+id/submit"/>-->
+<Button
+    android:layout_width="300dp"
+    android:layout_height="55dp"
+    android:text="submit"
+    android:layout_gravity="center"
+    android:background="@drawable/button"
+    android:id="@+id/submit"
+    android:textColor="#ffffff"
+    android:textSize="20sp"/>
+
+
+
+</LinearLayout>

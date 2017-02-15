@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_forgotpass"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.Forgotpass"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_forgotpass">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/in2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textColorHint="#101010"
+        android:textColor="#101010">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"
+            android:id="@+id/phno"
+            android:textColorHint="#454946"
+            android:hint="Mobile Number"
+            android:backgroundTint="#25303f"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/in5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#101010"
+        android:textColor="#101010">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/password"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:hint="Password"
+            android:backgroundTint="#25303f"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/in6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#101010"
+        android:textColor="#101010">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/confirmpassword"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:hint="Confirm Password"
+            android:backgroundTint="#25303f"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:elevation="5dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:padding="5dp"
+        android:text="submit"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/button"
+        android:id="@+id/submit"/>
+</LinearLayout>

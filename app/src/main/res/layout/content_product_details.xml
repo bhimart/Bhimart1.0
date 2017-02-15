@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_product_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.ProductDetails"
+    android:background="#fff"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:showIn="@layout/activity_product_details">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+    android:layout_width="match_parent"
+            android:id="@+id/rel1"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/frame1"
+        android:layout_height="wrap_content">
+
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            custom:pager_animation="Accordion"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation_span="1100"
+            android:layout_height="200dp"/>
+
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            custom:selected_color="#0095BF"
+            custom:unselected_color="#55333333"
+            custom:shape="oval"
+            custom:selected_padding_left="5dp"
+            custom:selected_padding_right="5dp"
+            custom:unselected_padding_left="5dp"
+            custom:unselected_padding_right="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            custom:selected_width="8dp"
+            custom:selected_height="8dp"
+            custom:unselected_width="8dp"
+            custom:unselected_height="8dp"
+
+            />
+        <!--  <FrameLayout
+            android:id="@+id/pager_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="230dp" />
+        </FrameLayout>-->
+    </FrameLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="5dp"
+    android:id="@+id/view1"
+    android:layout_marginTop="5dp"
+    android:layout_below="@+id/frame1"
+    android:background="#d1d0d0" />
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/prdname"
+    android:layout_marginTop="10dp"
+    android:textColor="#101010"
+    android:layout_below="@+id/view1"
+    android:textSize="18sp"
+    android:text="Redmi note 3"
+    android:gravity="center_horizontal"
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearcost"
+        android:padding="6dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/prdname"
+        android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#101010"
+                android:textSize="18sp"
+                android:text="₹"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#101010"
+                android:id="@+id/mrp"
+                android:text="15000"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textColor="#101010"
+                android:text="₹"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sellprice"
+                android:textSize="18sp"
+                android:textColor="#101010"
+                android:text="15000"
+                />
+
+
+        </LinearLayout>
+
+
+          <!--  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/shopname"
+        android:id="@+id/lin"
+        android:gravity="right">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:id="@+id/sub"
+            android:background="@drawable/ic_remove_circle_outline_black_36dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#101010"
+            android:layout_marginTop="8dp"
+            android:id="@+id/qtyvalue"
+            android:layout_marginRight="19dp"
+            android:textSize="19sp"
+            android:text="0"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/ic_add_circle_outline_black_36dp"
+            android:id="@+id/add" />
+
+
+    </LinearLayout>-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/linearcost"
+    android:id="@+id/shoplin"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Sold By: "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shopname"
+                android:padding="2dp"
+                android:textSize="15sp"
+
+                android:text="By Sangeetha mobiles"
+                android:textColor="#23bc3f"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+</LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:id="@+id/view2"
+                android:layout_below="@+id/shoplin"
+                android:background="#d1d0d0" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_below="@+id/view2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textSize="15sp"
+
+                    android:textStyle="bold"
+                    android:text="Description"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:id="@+id/description"
+                    android:text=" With your new Redmi Note 3, you have a phone that has a fast performance with the Snapdragon 650. The phone also has a great battery capacity. Though designed with a stylish premium metal body, this phone is lightweight, which makes it very comfortable to hold."/>
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+
+   <!-- <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:animateLayoutChanges="true"
+        android:background="#0b0b0b"
+        android:gravity="end"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.99"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="Total Amount:"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toqty"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:layout_marginRight="20dp"
+            android:text="qty"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tot"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="price"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+    </LinearLayout>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/vendorqty"
+
+        android:visibility="gone"
+        />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:padding="5dp"
+      android:orientation="horizontal">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/addcart1"
+        android:textColor="#fff"
+        android:padding="16dp"
+        android:text="Add To Cart"
+
+        android:background="@drawable/cartbutton1"/>
+  </LinearLayout>
+    </RelativeLayout>

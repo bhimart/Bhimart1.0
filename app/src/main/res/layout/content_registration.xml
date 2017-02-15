@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_registration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.Registration"
+    tools:showIn="@layout/activity_registration"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"
+
+                    android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                    android:hint="Your Name"
+                    android:backgroundTint="#25303f"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawableLeft="@drawable/ic_phone_black_24dp"
+                    android:id="@+id/phno"
+                    android:textColorHint="#454946"
+                    android:hint="Mobile Number"
+                    android:backgroundTint="#25303f"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/dob"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:textColorHint="#454946"
+                    android:hint="Date Of Birth"
+                    android:backgroundTint="#25303f"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/email"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:hint="EMAIL"
+
+                    android:backgroundTint="#25303f"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/password"
+                    android:drawableLeft="@drawable/ic_lock_black_24dp"
+                    android:hint="Password"
+
+                    android:backgroundTint="#25303f"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/in6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#101010"
+                android:textColor="#101010">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/confirmpassword"
+                    android:drawableLeft="@drawable/ic_lock_black_24dp"
+                    android:hint="Confirm Password"
+                    android:backgroundTint="#25303f"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+            <!-- <AutoCompleteTextView
+                 android:id="@+id/address_text_id"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Address"
+                 android:drawableLeft="@drawable/ic_room_white_24dp"
+                 android:inputType="textMultiLine"
+                 android:completionThreshold="3"
+                 android:layout_marginTop="10dp"
+                 android:textColorHint="#262626"
+                 android:backgroundTint="#ffffff"/>
+         -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#101010"
+                    android:layout_marginTop="10dp"
+                    android:text="Gender"
+                    android:textSize="18sp"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/radioSex"
+                    android:orientation="horizontal">
+
+
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rmale"
+                        android:textColor="#101010"
+                        android:text="MALE"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#101010"
+                        android:text="FEMALE"
+                        android:id="@+id/rfemale"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileimg"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/profile_pic"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                app:civ_border_color="#ffffff"/>
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/submit"
+                android:text="submit"
+                android:padding="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:textColor="#292828"
+                android:background="@drawable/button"
+                android:paddingBottom="10dp"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+        <!-- <LinearLayout
+             android:id="@+id/bot"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:alpha="1"
+             android:animateLayoutChanges="true"
+             android:orientation="horizontal"
+             android:padding="16dp"
+             android:layout_alignParentBottom="true"
+             android:weightSum="2">
+
+
+
+             </LinearLayout>-->
+
+
+        </LinearLayout>
+
+
+
+
+</ScrollView>
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="160dp"
+    android:layout_height="250dp"
+    android:background="#ffffff"
+    android:layout_gravity="center"
+    android:elevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+
+            android:gravity="center_horizontal"
+            android:text="Apply for Cupon code Here"/>
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textColor="#030303"
+            android:textSize="15sp"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/name" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="PhoneNumber"
+            android:padding="16dp"
+            android:textSize="15sp"
+            android:textColor="#030303"
+            android:layout_marginTop="10dp"
+            android:id="@+id/phonenumber" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:padding="16dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="#030303"
+            android:id="@+id/email"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="end"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelval"
+        android:text="Cancel"
+        android:textStyle="bold"
+        android:background="#fff"
+        android:textColor="#FF4081"
+        android:textSize="15sp"
+        android:layout_marginRight="40dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/okval"
+        android:background="#fff"
+        android:textSize="15sp"
+        android:textColor="#FF4081"
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"
+        android:text="ok"
+        />
+
+</LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

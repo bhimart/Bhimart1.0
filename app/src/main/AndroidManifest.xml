@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="sample.com.closebuy">
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Homepage"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Subcategory"
+            android:label="@string/title_activity_subcategory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Checkin"
+            android:label="@string/title_activity_checkin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProductDetails"
+            android:label="@string/title_activity_product_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Yourcart"
+            android:label="@string/title_activity_yourcart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginPage"
+            android:label="@string/title_activity_login_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".signlogin"
+            android:label="@string/title_activity_signlogin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Registration"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Forgotpass"
+            android:label="@string/title_activity_forgotpass"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Orderpage"
+            android:label="@string/title_activity_orderpage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".thankupage"
+            android:label="@string/title_activity_thankupage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapRoute"
+            android:label="@string/title_activity_map_route"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDwxjCrjwr1cQbD5uMoyRAIXy0nCiUc_q4" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".Profiledetails"
+            android:label="@string/title_activity_profiledetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Introduction_Splash"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Edit_profile"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Yourorders"
+            android:label="@string/title_activity_yourorders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Shopsubcat"
+            android:label="@string/title_activity_shopsubcat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pickrange"
+            android:label="@string/title_activity_pickrange"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pickrange1"
+            android:label="@string/title_activity_pickrange1"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+    </application>
+
+</manifest>

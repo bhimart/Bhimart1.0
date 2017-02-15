@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_subcategory"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.com.closebuy.Subcategory"
+    android:background="#f6f4f4"
+    tools:showIn="@layout/activity_subcategory">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.44"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="subcategories"
+        android:textSize="16sp"
+        android:textColor="#080808"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="#fff"
+
+        android:elevation="5dp"
+        android:id="@+id/subcat">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Product list"
+            android:textSize="16sp"
+            android:textColor="#080808"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/noprod"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/noproductsfound"/>
+        <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        android:id="@+id/prodlist">
+    </android.support.v7.widget.RecyclerView>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
+
+   <!-- <LinearLayout
+        android:id="@+id/bot"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:alpha="1"
+        android:animateLayoutChanges="true"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2">
+-->
+
+
+
+
+
+
+      <!--  <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lin"
+            android:elevation="5dp"
+            android:layout_weight="1"
+            android:background="#0cb714">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:textSize="18sp"
+                android:textColor="#fffbfb"
+                android:layout_marginTop="8dp"
+                android:text="Total:" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tot"
+                android:layout_marginTop="8dp"
+                android:text="price"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+        </LinearLayout>-->
+
+<!--
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="5dp"
+            android:id="@+id/cont"
+            android:layout_toRightOf="@+id/lin"
+            android:textColor="#ffffff"
+            android:background="#ea8e09"
+            android:layout_marginLeft="2dp"
+            android:text="Continue"
+            />-->
+
+ <!--  </LinearLayout>-->
+
+</LinearLayout>
