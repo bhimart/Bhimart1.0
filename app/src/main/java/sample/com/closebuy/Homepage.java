@@ -126,7 +126,6 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener,
     private String urlParameters;
     ProgressDialog dialog;
     protected final String TAG = "homepage";
-    protected String mAddressOutput;
     String range;
     LoginSessionManager loginSessionManager;
     private Boolean exit = false;
