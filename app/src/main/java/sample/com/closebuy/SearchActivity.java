@@ -1,10 +1,8 @@
 package sample.com.closebuy;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,20 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,22 +51,16 @@ import pojo.ShoppingCartResults;
 public class SearchActivity extends AppCompatActivity {
 
     AutoCompleteTextView searchtv;
-    String search1 = "";
-    String searchRange,searchTearm;
-    String baseurl ="http://quotecp.com:444";
+    String searchtext,rangetext;
     private List<ProductModel> list;
     private String urlParameters;
     JSONArray arr = null;
     private RecyclerView recyclarviewProduct;
-    // CrystalSeekbar seekbar;
-    TextView seekbarMinvalue;
-    String range;
-    String seekbarValue;
+    TextView seekbarMinvalueTv;
     private SeekBar seekbar = null;
-    private MenuItem searchItem;
     ImageView closeBtn;
-    //  private ProductAdapter mAdapter;
-    ProgressDialog dialog,dialog1;
+   
+    ProgressDialog dialog;
     private List<ShoppingCartResults> mCartList;
     DbHelper helper;
     String lat,lan;
@@ -89,13 +73,15 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
+
         lat=extras.getString("lat");
         lan=extras.getString("lan");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-               /* Intent homepage = new Intent(SearchActivity.this,Homepage.class);
-                startActivity(homepage);*/
+            public void onClick(View v)
+            {
+
                 onBackPressed();
             }
         });
@@ -105,10 +91,9 @@ public class SearchActivity extends AppCompatActivity {
         searchtv = (AutoCompleteTextView) findViewById(R.id.autoserachitem_tv);
         recyclarviewProduct = (RecyclerView) findViewById(R.id.productlistrv);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        // searchtv.setDropDownBackgroundResource(R.color.grdgreen);
         searchtv.setHint("search");
 
-        search1 = searchtv.getText().toString();
+        searchtext = searchtv.getText().toString();
         searchtv.addTextChangedListener(searchvalue);
         seekBarCall();
         closeBtn = (ImageView)findViewById(R.id.tb_closebutton);
@@ -126,58 +111,23 @@ public class SearchActivity extends AppCompatActivity {
 
 
     }
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
 
-       *//* searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchtv.addTextChangedListener(searchvalue);
-        //searchView.setQueryHint("searchtext");
-
-        //searchView.setBackgroundColor(R.color.white);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(
-                new ComponentName(this, SearchActivity.class)));
-
-        searchView.setIconifiedByDefault(false);*//*
-
-
-        return true;
-    }*/
-
-
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-       *//* int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.notification) {
-            return true;
-        }*//*
-        return super.onOptionsItemSelected(item);
-    }*/
 
     private void seekBarCall(){
 
         seekbar = (SeekBar) findViewById(R.id.rangeSeekbar1);
-        seekbarMinvalue = (TextView) findViewById(R.id.textMin1);
+        seekbarMinvalueTv = (TextView) findViewById(R.id.textMin1);
         seekbar.setVisibility(View.GONE);
-        seekbarMinvalue.setVisibility(View.GONE);
+        seekbarMinvalueTv.setVisibility(View.GONE);
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 15;
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 progressChanged = progress;
-                seekbarMinvalue.setText(String.valueOf(progressChanged));
+                seekbarMinvalueTv.setText(String.valueOf(progressChanged));
                 autosuggest autos = new autosuggest();
-                range = seekbarMinvalue.getText().toString();
+                rangetext = seekbarMinvalueTv.getText().toString();
                 autos.execute("http://quotecp.com:444/api/ProductSearch");
             }
 
@@ -194,39 +144,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-
-      /*  // get seekbar from view
-        seekbar = (CrystalSeekbar) findViewById(R.id.rangeSeekbar1);
-        seekbarMinvalue = (TextView) findViewById(R.id.textMin1);
-        seekbar.setVisibility(View.GONE);
-        seekbarMinvalue.setVisibility(View.GONE);
-        seekbar.setMinValue(7);
-        seekbar.setMaxValue(20);
-
-
-        // get min and max text view
-
-
-        // set listener
-        seekbar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue) {
-                seekbarMinvalue.setText(String.valueOf(minValue));
-
-                 autosuggest autos = new autosuggest();
-                 range = seekbarMinvalue.getText().toString();
-                 autos.execute("http://quotecp.com:444/api/ProductSearch");
-
-            }
-        });
-
-        // set final value listener
-        seekbar.setOnSeekbarFinalValueListener(new OnSeekbarFinalValueListener() {
-            @Override
-            public void finalValue(Number value) {
-                Log.d("CRS=>", String.valueOf(value));
-            }
-        });*/
+        
     }
 
     private final TextWatcher searchvalue = new TextWatcher() {
@@ -241,12 +159,12 @@ public class SearchActivity extends AppCompatActivity {
 
             if(s.length() >= 3)
             {
-                searchTearm= searchtv.getText().toString();
+                searchtext= searchtv.getText().toString();
                 autosuggest autos = new autosuggest();
-                range = "7";
+                rangetext = "7";
                 autos.execute("http://quotecp.com:444/api/ProductSearch");
                 seekbar.setVisibility(View.VISIBLE);
-                seekbarMinvalue.setVisibility(View.VISIBLE);
+                seekbarMinvalueTv.setVisibility(View.VISIBLE);
                 closeBtn.setVisibility(View.VISIBLE);
             }
         }
@@ -264,9 +182,6 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-           /*dialog1 =  ProgressDialog.show(SearchActivity.this,"Loading","Please Wait.....");
-            dialog1.show();*/
         }
 
         @Override
@@ -279,8 +194,8 @@ public class SearchActivity extends AppCompatActivity {
 
                 urlParameters = "&lati=" + URLEncoder.encode(lat, "UTF-8") +
                         "&longi=" + URLEncoder.encode(lan, "UTF-8")+
-                        "&range=" + URLEncoder.encode(range, "UTF-8")+
-                        "&Term=" + URLEncoder.encode(searchTearm, "UTF-8");
+                        "&range=" + URLEncoder.encode(rangetext, "UTF-8")+
+                        "&Term=" + URLEncoder.encode(searchtext, "UTF-8");
 
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
@@ -316,16 +231,16 @@ public class SearchActivity extends AppCompatActivity {
                 arr = new JSONArray(finalJson);
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    ProductModel model1 = new ProductModel();
-                    if (obj != null && arr.length() > 0) {
-                        model1.setId(obj.getString("ShopProductID"));
-                        model1.setThumbnailUrl(obj.getString("Image"));
-                        model1.setShopname(obj.getString("ShopName"));
-                        model1.setPrice(obj.getString("Price"));
-                        model1.setName(obj.getString("ProductName"));
-                        model1.setVendorQty(obj.getString("VendorQty"));
-
-                        itemModelList1.add(model1);
+                    ProductModel modelproduct = new ProductModel();
+                    if (obj != null && arr.length() > 0)
+                    {
+                        modelproduct.setId(obj.getString("ShopProductID"));
+                        modelproduct.setThumbnailUrl(obj.getString("Image"));
+                        modelproduct.setShopname(obj.getString("ShopName"));
+                        modelproduct.setPrice(obj.getString("Price"));
+                        modelproduct.setName(obj.getString("ProductName"));
+                        modelproduct.setVendorQty(obj.getString("VendorQty"));
+                        itemModelList1.add(modelproduct);
                     }
                 }
 
@@ -355,7 +270,7 @@ public class SearchActivity extends AppCompatActivity {
         protected void onPostExecute(List<ProductModel> detailsModels1) {
 
             super.onPostExecute(detailsModels1);
-//
+
             if (detailsModels1 != null && detailsModels1.size() > 0) {
                 System.out.println("det1-" + detailsModels1);
                 recyclarviewProduct = (RecyclerView) findViewById(R.id.productlistrv);
@@ -365,8 +280,7 @@ public class SearchActivity extends AppCompatActivity {
                 recyclarviewProduct.setHasFixedSize(true);
                 ProductAdapter rcAda = new ProductAdapter(getApplicationContext(), detailsModels1);
                 recyclarviewProduct.setAdapter(rcAda);
-
-                // dialog1.dismiss();
+                
             }else{
 
                 recyclarviewProduct.setAdapter(null);
@@ -374,7 +288,7 @@ public class SearchActivity extends AppCompatActivity {
 
             }
 
-//dialog.dismiss();
+
         }
 
     }
@@ -493,12 +407,12 @@ public class SearchActivity extends AppCompatActivity {
                             String pimageval = pimagetext.getText().toString();
                             helper.insert(id.getText().toString(), 1, pricevalue,vendorqant, name.getText().toString(), pimageval, shopname.getText().toString());
                             Toast.makeText(SearchActivity.this, "success", Toast.LENGTH_SHORT).show();
-                        } else {
+                        } else 
+                        {
 
                             Toast.makeText(SearchActivity.this, "Already Exists", Toast.LENGTH_SHORT).show();
                         }
-
-                        //Toast.makeText(Subcategory.this,"already exists",Toast.LENGTH_SHORT).show();
+                        
                     }
                 });
             }
@@ -512,24 +426,3 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-
-/*autoCompView.addTextChangedListener(new TextWatcher() {
-
-          @Override
-          public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-          }
-
-          @Override
-          public void onTextChanged(CharSequence charSequence, int a, int b, int c) {
-              if (a == 3) {
-                  Toast.makeText(getApplicationContext(), "Maximum Limit Reached" + searchTerm + "", Toast.LENGTH_SHORT).show();
-              }
-          }
-
-          @Override
-          public void afterTextChanged(Editable editable) {
-
-
-          }
-      });*/

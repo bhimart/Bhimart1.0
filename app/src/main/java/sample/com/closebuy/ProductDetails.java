@@ -61,7 +61,9 @@ public class ProductDetails extends AppCompatActivity  implements View.OnClickLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -112,7 +114,8 @@ public class ProductDetails extends AppCompatActivity  implements View.OnClickLi
 
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menuprodetails, menu);
 
@@ -205,11 +208,13 @@ public class ProductDetails extends AppCompatActivity  implements View.OnClickLi
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
+    public void onPageScrollStateChanged(int state)
+    {
 
     }
 
-    public class getimgs extends AsyncTask<String, Void, String> {
+    public class getimgs extends AsyncTask<String, Void, String>
+    {
 
         @Override
         protected void onPreExecute() {

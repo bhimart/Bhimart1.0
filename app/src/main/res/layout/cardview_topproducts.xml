@@ -32,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Camera"
                 android:textColor="#0b0b0b"
-                android:id="@+id/name"/>
+                android:id="@+id/uname"/>
 
             <TextView
                 android:layout_width="79dp"

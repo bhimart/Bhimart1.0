@@ -27,7 +27,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/name"
+                android:id="@+id/uname"
                 android:textColorHint="#454946"
                 android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
                 android:hint="Name"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/ic_phone_black_24dp"
-                android:id="@+id/phno"
+                android:id="@+id/mobileno"
                 android:textColorHint="#454946"
                 android:hint="Ph.No"
                 android:backgroundTint="#ffffff"/>

@@ -15,8 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -90,8 +88,8 @@ public class Edit_profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         loginSessionManager = new LoginSessionManager(getApplicationContext());
         HashMap<String, String> user = loginSessionManager.getUserDetails();
-        uname = (EditText) findViewById(R.id.name);
-        uphone = (EditText) findViewById(R.id.phno);
+        uname = (EditText) findViewById(R.id.uname);
+        uphone = (EditText) findViewById(R.id.mobileno);
         idString = user.get(LoginSessionManager.KEY_ID);
 
         phstring = user.get(LoginSessionManager.KEY_PHONE);
@@ -508,7 +506,7 @@ public class Edit_profile extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "updated", Toast.LENGTH_LONG).show();
 
-                        Intent fp=new Intent(getApplicationContext(),Profiledetails.class);
+                        Intent fp=new Intent(getApplicationContext(),ProfileDetails.class);
                         startActivity(fp);
                         //   finish();
                         Log.d("result++++", result);

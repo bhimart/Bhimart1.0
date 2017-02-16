@@ -1,6 +1,5 @@
 package sample.com.closebuy;
 
-import android.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,18 +12,14 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -38,8 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -61,14 +54,10 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
-import javax.xml.validation.Validator;
 
 
 public class Checkin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener,
@@ -289,7 +278,7 @@ Button apply;
          alertDialogBuilder = new AlertDialog.Builder(Checkin.this);
         alertDialogBuilder.setView(promptView);
 
-         name = (EditText) promptView.findViewById(R.id.name);
+         name = (EditText) promptView.findViewById(R.id.uname);
          phoneno = (EditText) promptView.findViewById(R.id.phonenumber);
          email= (EditText) promptView.findViewById(R.id.email);
          submit =(TextView) promptView.findViewById(R.id.okval);

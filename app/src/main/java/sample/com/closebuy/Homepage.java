@@ -1,6 +1,5 @@
 package sample.com.closebuy;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,25 +8,15 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.ResultReceiver;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.LruCache;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,9 +30,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,10 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.ConnectionResult;
@@ -72,7 +54,6 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,13 +62,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -99,7 +76,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import Adapters.DbHelper;
 import Adapters.DbHelpertopcat;
 import Adapters.Topcategories;
 import Adapters.Topdadd;
@@ -107,10 +83,7 @@ import Adapters.Topproducts;
 import Adapters.Topshops;
 import SessionManager.LoginSessionManager;
 import SessionManager.seekbarsession;
-import pojo.AppUtils;
-import pojo.ShoppingCartResults;
 import pojo.advertisment;
-import pojo.cartvalues;
 import pojo.category;
 import pojo.products;
 import pojo.shops;
@@ -314,7 +287,7 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener,
                 //Check to see which item was being clicked and perform appropriate action
                 switch (id) {
                     case R.id.nav_profile_id:
-                        Intent i1 = new Intent(Homepage.this, Profiledetails.class);
+                        Intent i1 = new Intent(Homepage.this, ProfileDetails.class);
                         startActivity(i1);
                         break;
 
@@ -496,7 +469,7 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener,
 
         switch (view.getId()) {
             case R.id.nav_profile_id:
-                Intent i1 = new Intent(Homepage.this, Profiledetails.class);
+                Intent i1 = new Intent(Homepage.this, ProfileDetails.class);
                 startActivity(i1);
                 break;
 

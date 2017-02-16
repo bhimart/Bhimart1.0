@@ -69,7 +69,7 @@ public class Topproducts extends RecyclerView.Adapter<Topproducts.ViewHolder>
         public ViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.prodimg);
-            prdname = (TextView) itemView.findViewById(R.id.name);
+            prdname = (TextView) itemView.findViewById(R.id.uname);
             prdid   = (TextView) itemView.findViewById(R.id.idvalue1);
             price   = (TextView) itemView.findViewById(R.id.price);
            imagepath= (TextView) itemView.findViewById(R.id.imagepath);

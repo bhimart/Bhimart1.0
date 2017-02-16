@@ -32,7 +32,7 @@
             android:textSize="15sp"
             android:padding="16dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/name" />
+            android:id="@+id/uname" />
 
         <EditText
             android:layout_width="match_parent"
