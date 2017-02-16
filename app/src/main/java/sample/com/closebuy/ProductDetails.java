@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -81,12 +82,12 @@ public class ProductDetails extends AppCompatActivity  implements View.OnClickLi
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
-        cd = new ConnectionDetector(getApplicationContext());
-        Isinternetpresent = cd.isConnectingToInternet();
         Bundle extras = getIntent().getExtras();
         idtext = extras.getString("shopprdid");
         productimage=extras.getString("pimage");
 
+        cd = new ConnectionDetector(getApplicationContext());
+        Isinternetpresent = cd.isConnectingToInternet();
         if (Isinternetpresent)
         {
 
@@ -151,7 +152,8 @@ public class ProductDetails extends AppCompatActivity  implements View.OnClickLi
             pricesql=priceTv.getText().toString();
             vendorquant=Integer.parseInt(vendorqtyTv.getText().toString());
             helper.insert(idtext, itmQty, Integer.parseInt(pricesql),vendorquant, prdnameTv.getText().toString(), productimage, shopnameTv.getText().toString());
-            Toast.makeText(ProductDetails.this,"success",Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(ProductDetails.this,"Added to cart",Toast.LENGTH_SHORT).show();
         }
         else
         {
