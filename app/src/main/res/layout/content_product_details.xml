@@ -296,7 +296,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/addcart1"
+        android:id="@+id/addcart"
         android:textColor="#fff"
         android:padding="16dp"
         android:text="Add To Cart"
