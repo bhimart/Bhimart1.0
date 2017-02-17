@@ -46,11 +46,11 @@ public class Topproducts extends RecyclerView.Adapter<Topproducts.ViewHolder>
 
     @Override
     public void onBindViewHolder(Topproducts.ViewHolder holder, int position) {
-        holder.prdid.setText(itemList.get(position).getid());
-        holder.prdname.setText(itemList.get(position).getName());
-        holder.price.setText(itemList.get(position).getprice());
-        holder.imagepath.setText(itemList.get(position).getThumbnailUrl());
-        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.icon);
+        holder.productidTv.setText(itemList.get(position).getid());
+        holder.productnameTv.setText(itemList.get(position).getName());
+        holder.priceTv.setText(itemList.get(position).getprice());
+        holder.imagepathTv.setText(itemList.get(position).getThumbnailUrl());
+        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.iconImg);
 
 
     }
@@ -64,15 +64,17 @@ public class Topproducts extends RecyclerView.Adapter<Topproducts.ViewHolder>
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView prdname,prdid,price,imagepath;
-        ImageView icon;
-        public ViewHolder(View itemView) {
+        TextView productnameTv,productidTv,priceTv,imagepathTv;
+        ImageView iconImg;
+
+        public ViewHolder(View itemView)
+        {
             super(itemView);
-            icon = (ImageView) itemView.findViewById(R.id.prodimg);
-            prdname = (TextView) itemView.findViewById(R.id.uname);
-            prdid   = (TextView) itemView.findViewById(R.id.idvalue1);
-            price   = (TextView) itemView.findViewById(R.id.price);
-           imagepath= (TextView) itemView.findViewById(R.id.imagepath);
+            iconImg = (ImageView) itemView.findViewById(R.id.prodimg);
+            productnameTv = (TextView) itemView.findViewById(R.id.uname);
+            productidTv   = (TextView) itemView.findViewById(R.id.idvalue1);
+            priceTv   = (TextView) itemView.findViewById(R.id.price);
+           imagepathTv= (TextView) itemView.findViewById(R.id.imagepath);
 
 
             itemView.setOnClickListener(new View.OnClickListener()
@@ -81,8 +83,8 @@ public class Topproducts extends RecyclerView.Adapter<Topproducts.ViewHolder>
                 public void onClick(View view)
                 {
                  Intent in=new Intent(view.getContext(), ProductDetails.class);
-                    in.putExtra("shopprdid",prdid.getText().toString());
-                    in.putExtra("pimage",imagepath.getText().toString());
+                    in.putExtra("shopprdid",productidTv.getText().toString());
+                    in.putExtra("pimage",imagepathTv.getText().toString());
                     view.getContext().startActivity(in);
                 }
             });

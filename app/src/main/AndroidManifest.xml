@@ -61,7 +61,7 @@
             android:label="@string/title_activity_orderpage"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".thankupage"
+            android:name=".Thankupage"
             android:label="@string/title_activity_thankupage"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

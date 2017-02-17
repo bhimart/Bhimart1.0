@@ -157,9 +157,11 @@ public class Registration extends AppCompatActivity {
             public void onClick(View v) {
                 String con=confirmpassEt.getText().toString();
                 String pas=passEt.getText().toString();
-                if (usernameEt.getText().toString().length() == 0) {
+                if (usernameEt.getText().toString().length() == 0)
+                {
                     usernameEt.setError("Please Enter Your Name");
-                } else if (usernameEt.getText().toString().length() < 10)
+                }
+                else if (usernameEt.getText().toString().length() < 10)
                 {
                     userphoneEt.setError("Please Enter Your Valid Mobile Number");
 
@@ -207,6 +209,7 @@ public class Registration extends AppCompatActivity {
 
 
                         SignupRegistraion Regtask = new SignupRegistraion();
+
                        /*api to Register a user details*/
                         Regtask.execute(new String[]{"http://quotecp.com:444/api/Customer"});
                     }
@@ -311,10 +314,12 @@ public class Registration extends AppCompatActivity {
             try {
 
                 array = new JSONArray(result);
-                for (int i = 0; i < array.length(); i++) {
+                for (int i = 0; i < array.length(); i++)
+                {
                     JSONObject obj = array.getJSONObject(i);
                     String state = obj.getString("Status");
-                    if (state.equals("Success")) {
+                    if (state.equals("Success"))
+                    {
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Successfully Registred", Toast.LENGTH_LONG).show();
 
@@ -329,7 +334,8 @@ public class Registration extends AppCompatActivity {
                         loginSessionManager.createLoginSession(phonetext, customeridtext, passwordtext);
 
 
-                    } else
+                    }
+                    else
                     {
                         Toast.makeText(getApplicationContext(), "Registration was not successfully done, please try again", Toast.LENGTH_LONG).show();
 
@@ -345,7 +351,8 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    protected Dialog onCreateDialog(int id) {
+    protected Dialog onCreateDialog(int id)
+    {
         switch (id) {
             case DATE_PICKER_ID:
                 // set date picker as current date
@@ -355,7 +362,8 @@ public class Registration extends AppCompatActivity {
     }
 
 
-    private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener()
+    {
 
 
         @Override
@@ -378,7 +386,8 @@ public class Registration extends AppCompatActivity {
         }
     };
 
-    private void updateDisplay() {
+    private void updateDisplay()
+    {
         dobEt.setText(//this is the edit text where you want to show the selected date
                 new StringBuilder()
                         // Month is 0 based so add 1
@@ -391,7 +400,8 @@ public class Registration extends AppCompatActivity {
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Check that the result was from the autocomplete widget.
@@ -430,7 +440,8 @@ public class Registration extends AppCompatActivity {
 
         }
     }
-    private boolean isReadStorageAllowed() {
+    private boolean isReadStorageAllowed()
+    {
         //Getting the permission status
 
         int result1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -470,7 +481,8 @@ public class Registration extends AppCompatActivity {
         return false;
     }
 
-    private void requestCameraPermission() {
+    private void requestCameraPermission()
+    {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CAMERA)) {
             //If the user has denied the permission previously your code will come to this block
@@ -484,7 +496,8 @@ public class Registration extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
 
         //Checking the request code of our request
         if (requestCode == GALLERY_PERMISSION_CODE) {
@@ -502,7 +515,8 @@ public class Registration extends AppCompatActivity {
         }
 
 
-        if (requestCode == CAMERA_PERMISSION_CODE) {
+        if (requestCode == CAMERA_PERMISSION_CODE)
+        {
 
             //If permission is granted
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

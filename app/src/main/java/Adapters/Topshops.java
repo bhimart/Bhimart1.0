@@ -45,10 +45,10 @@ public class Topshops extends RecyclerView.Adapter<Topshops.ViewHolder>
     @Override
     public void onBindViewHolder(Topshops.ViewHolder holder, int position)
     {
-        holder.id.setText(itemList.get(position).getid());
-        holder.name.setText(itemList.get(position).getName());
-        holder.distance.setText(itemList.get(position).getdistance());
-        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.icon);
+        holder.shopidTv.setText(itemList.get(position).getid());
+        holder.shopnameTv.setText(itemList.get(position).getName());
+        holder.distanceTv.setText(itemList.get(position).getdistance());
+        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.iconImg);
     }
 
     @Override
@@ -60,25 +60,26 @@ public class Topshops extends RecyclerView.Adapter<Topshops.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView name,id,distance;
-        ImageView icon;
+        TextView shopnameTv,shopidTv,distanceTv;
+        ImageView iconImg;
 
         public ViewHolder(View itemView)
         {
 
             super(itemView);
 
-            icon = (ImageView) itemView.findViewById(R.id.shops);
-            name = (TextView) itemView.findViewById(R.id.shopname);
-            id   = (TextView) itemView.findViewById(R.id.idval);
-            distance   = (TextView) itemView.findViewById(R.id.distance);
+            iconImg    = (ImageView) itemView.findViewById(R.id.shops);
+            shopnameTv = (TextView) itemView.findViewById(R.id.shopname);
+            shopidTv   = (TextView) itemView.findViewById(R.id.idval);
+            distanceTv = (TextView) itemView.findViewById(R.id.distance);
+
             itemView.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view)
                 {
                     Intent in=new Intent(view.getContext(), Shopsubcat.class);
-                    in.putExtra("shopid",id.getText().toString());
+                    in.putExtra("shopid",shopidTv.getText().toString());
                     view.getContext().startActivity(in);
                 }
             });

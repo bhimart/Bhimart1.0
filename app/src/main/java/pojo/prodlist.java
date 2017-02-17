@@ -6,7 +6,7 @@ package pojo;
 
 public class prodlist {
 
-    String id,name,mThumbnailUrl,prodname,shopname,price,mVendorQty;
+    String id,name,mThumbnailUrl,prodname,shopname,price,mVendorQty,categoryid;
 
     public prodlist()
     {
@@ -17,6 +17,7 @@ public class prodlist {
         this.shopname=shopname;
         this.price=price;
         this.mVendorQty=mVendorQty;
+        this.categoryid=categoryid;
     }
     public String getid()
     {
@@ -82,4 +83,13 @@ public class prodlist {
   public void setPrice(String price){
    this.price=price;
   }
+    public String getcategoryid()
+    {
+        return categoryid;
+    }
+    public void setcategoryid(String categoryid)
+    {
+
+        this.categoryid=categoryid;
+    }
 }

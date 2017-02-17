@@ -41,14 +41,14 @@ public class yourorderlist extends RecyclerView.Adapter<yourorderlist.ViewHolder
 
     @Override
     public void onBindViewHolder(yourorderlist.ViewHolder holder, int position) {
-        holder.prdname.setText(itemList.get(position).getProdname());
-        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.icon);
-        holder.qty.setText(itemList.get(position).getqty());
-        holder.totalprice.setText(itemList.get(position).gettotalprice());
-        holder.orderid.setText(itemList.get(position).getorderid());
-        holder.seller.setText(itemList.get(position).getShopname());
+        holder.productnameTv.setText(itemList.get(position).getProdname());
+        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.iconImg);
+        holder.quantityTv.setText(itemList.get(position).getqty());
+        holder.totalpriceTv.setText(itemList.get(position).gettotalprice());
+        holder.orderidTv.setText(itemList.get(position).getorderid());
+        holder.sellerTv.setText(itemList.get(position).getShopname());
 
-        System.out.println("holder---"+holder.prdname.getText().toString());
+        System.out.println("holder---"+holder.productnameTv.getText().toString());
     }
 
     @Override
@@ -60,20 +60,20 @@ public class yourorderlist extends RecyclerView.Adapter<yourorderlist.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView name,id,orderid,prdname,qty,totalprice,seller;
-        ImageView icon;
+        TextView orderidTv,productnameTv,quantityTv,totalpriceTv,sellerTv;
+        ImageView iconImg;
 
         public ViewHolder(View itemView)
         {
 
             super(itemView);
 
-            icon = (ImageView) itemView.findViewById(R.id.prdimg);
-            orderid= (TextView) itemView.findViewById(R.id.orderid);
-            prdname=(TextView) itemView.findViewById(R.id.prdname);
-            qty=(TextView) itemView.findViewById(R.id.qty);
-            totalprice=(TextView) itemView.findViewById(R.id.totalprice);
-            seller=(TextView) itemView.findViewById(R.id.seller);
+            iconImg = (ImageView) itemView.findViewById(R.id.prdimg);
+            orderidTv= (TextView) itemView.findViewById(R.id.orderid);
+            productnameTv=(TextView) itemView.findViewById(R.id.prdname);
+            quantityTv=(TextView) itemView.findViewById(R.id.qty);
+            totalpriceTv=(TextView) itemView.findViewById(R.id.totalprice);
+            sellerTv=(TextView) itemView.findViewById(R.id.seller);
             itemView.setOnClickListener(new View.OnClickListener()
             {
                 @Override

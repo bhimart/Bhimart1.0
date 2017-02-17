@@ -29,7 +29,8 @@ public class Cart extends RecyclerView.Adapter<Cart.ViewHolder> {
     private Context context;
     DbHelper helper;
     int fullprdtotal=0;
-    public Cart(Context context, List<cartvalues> itemList) {
+    public Cart(Context context, List<cartvalues> itemList)
+    {
         this.context=context;
         this.itemList=itemList;
         helper = new DbHelper(context);
@@ -37,13 +38,13 @@ public class Cart extends RecyclerView.Adapter<Cart.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
-        holder.prdid.setText(itemList.get(position).getid());
-        holder.prdname.setText(itemList.get(position).getProdname());
-        holder.price.setText(itemList.get(position).getprice()+"");
-        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.icon);
-        holder.qty.setText(itemList.get(position).getqty()+"");
-        holder.prdtotal.setText(itemList.get(position).gettotalprice()+"");
-        System.out.println("holder---"+holder.prdname.getText().toString());
+        holder.productidTv.setText(itemList.get(position).getid());
+        holder.productnameTv .setText(itemList.get(position).getProdname());
+        holder.priceTv.setText(itemList.get(position).getprice()+"");
+        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.iconImg);
+        holder.quantityTv.setText(itemList.get(position).getqty()+"");
+        holder.producttotalTv.setText(itemList.get(position).gettotalprice()+"");
+
 
 
     }
@@ -59,92 +60,92 @@ public class Cart extends RecyclerView.Adapter<Cart.ViewHolder> {
 
     @Override
     public int getItemCount()
-        {
-            return this.itemList.size();
+    {
+        return this.itemList.size();
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener
+public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener
+{
+
+    TextView productnameTv ,productidTv, priceTv,quantityTv, producttotalTv;
+    ImageView iconImg, subtractQtyImg, addQtyImg;
+    private int itmQty=1;
+    private int SELECTED_POS;
+    String productidtext;
+    Button removeBtn;
+    int tot;
+    public ViewHolder(View itemView)
     {
 
-        TextView prdname,prdid,price,qty,prdtotal;
-        ImageView icon,subtractQty,addQty;
-        private int itmQty=1;
-        private int SELECTED_POS;
-        String prodid;
-        Button remove;
-        int tot;
-        public ViewHolder(View itemView)
+        super(itemView);
+
+        iconImg = (ImageView) itemView.findViewById(R.id.prdimg);
+        productnameTv  = (TextView) itemView.findViewById(R.id.prdname);
+        productidTv   = (TextView) itemView.findViewById(R.id.pid);
+        priceTv   = (TextView) itemView.findViewById(R.id.prdprice);
+        quantityTv     =  (TextView) itemView.findViewById(R.id.qtyval);
+        addQtyImg=(ImageView)itemView.findViewById(R.id.add);
+        removeBtn=(Button) itemView.findViewById(R.id.remove);
+        subtractQtyImg=(ImageView)itemView.findViewById(R.id.sub);
+        producttotalTv=(TextView) itemView.findViewById(R.id.prdtotal);
+        itemView.setOnClickListener(this);
+        addQtyImg.setOnClickListener(this);
+        subtractQtyImg.setOnClickListener(this);
+        removeBtn.setOnClickListener(this);
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+
+
+
+        if(v==addQtyImg)
         {
-
-            super(itemView);
-
-            icon = (ImageView) itemView.findViewById(R.id.prdimg);
-            prdname = (TextView) itemView.findViewById(R.id.prdname);
-            prdid   = (TextView) itemView.findViewById(R.id.pid);
-            price   = (TextView) itemView.findViewById(R.id.prdprice);
-            qty     =  (TextView) itemView.findViewById(R.id.qtyval);
-            addQty=(ImageView)itemView.findViewById(R.id.add);
-            remove=(Button) itemView.findViewById(R.id.remove);
-            subtractQty=(ImageView)itemView.findViewById(R.id.sub);
-            prdtotal=(TextView) itemView.findViewById(R.id.prdtotal);
-            itemView.setOnClickListener(this);
-            addQty.setOnClickListener(this);
-            subtractQty.setOnClickListener(this);
-            remove.setOnClickListener(this);
-
-
-
-   }
-
-        @Override
-        public void onClick(View v) {
-
-
-
-
-            if(v==addQty)
-            {
-             ++itmQty;
+            ++itmQty;
             cartvalues item = itemList.get(SELECTED_POS);
             item.setqty(itmQty);
-            qty.setText(String.valueOf(itmQty));
-            prodid=prdid.getText().toString();
-            helper.updateqty(prodid,itmQty);
-             tot=(Integer.parseInt(price.getText().toString())* itmQty);
-                prdtotal.setText(tot+"");
+            quantityTv.setText(String.valueOf(itmQty));
+            productidtext=productidTv.getText().toString();
+            helper.updateqty(productidtext,itmQty);
+            tot=(Integer.parseInt(priceTv.getText().toString())* itmQty);
+            producttotalTv.setText(tot+"");
 
-                fullprdtotal+=tot;
-                System.out.println("full---"+fullprdtotal);
-
-            }
-
-            if(v==subtractQty)
-            {
-              if(itmQty > 1) {
-                  --itmQty;
-                  cartvalues item = itemList.get(SELECTED_POS);
-                  item.setqty(itmQty);
-                  qty.setText(String.valueOf(itmQty));
-                  prodid = prdid.getText().toString();
-                  helper.updateqty(prodid, itmQty);
-                  tot=(Integer.parseInt(price.getText().toString())* itmQty);
-                  prdtotal.setText(tot+"");
-              }else{
-
-                  qty.setText("1");
-              }
-            }
-            if(v==remove){
-                prodid=prdid.getText().toString();
-                 helper.delete(prodid);
-                  Intent in=new Intent(v.getContext(),Yourcart.class);
-
-                  v.getContext().startActivity(in);
-
-            }
-
+            fullprdtotal+=tot;
+            System.out.println("full---"+fullprdtotal);
 
         }
+
+        if(v==subtractQtyImg)
+        {
+            if(itmQty > 1) {
+                --itmQty;
+                cartvalues item = itemList.get(SELECTED_POS);
+                item.setqty(itmQty);
+                quantityTv.setText(String.valueOf(itmQty));
+                productidtext = productidTv.getText().toString();
+                helper.updateqty(productidtext, itmQty);
+                tot=(Integer.parseInt(priceTv.getText().toString())* itmQty);
+                producttotalTv.setText(tot+"");
+            }else{
+
+                quantityTv.setText("1");
+            }
+        }
+        if(v==removeBtn){
+            productidtext=productidTv.getText().toString();
+            helper.delete(productidtext);
+            Intent in=new Intent(v.getContext(),Yourcart.class);
+
+            v.getContext().startActivity(in);
+
+        }
+
+
     }
+}
 }

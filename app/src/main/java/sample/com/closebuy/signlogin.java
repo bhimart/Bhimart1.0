@@ -10,24 +10,25 @@ import android.view.View;
 import android.widget.Button;
 
 public class signlogin extends AppCompatActivity {
-Button signup,login;
+Button signupBtn,loginBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signlogin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        signup=(Button)findViewById(R.id.signup);
-        login=(Button)findViewById(R.id.login);
+        signupBtn=(Button)findViewById(R.id.signup);
+        loginBtn=(Button)findViewById(R.id.login);
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        signupBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 Intent sign=new Intent(signlogin.this,Registration.class);
                 startActivity(sign);
             }
         });
-       login.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent sign=new Intent(signlogin.this,LoginPage.class);

@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import Adapters.DbHelper;
+import Adapters.ProductlistAdapter;
 import Adapters.Topproducts;
 import SessionManager.seekbarsession;
 import pojo.ShoppingCartResults;
@@ -52,25 +53,18 @@ import pojo.prodlist;
 import pojo.products;
 
 public class Subcategory extends AppCompatActivity {
-    JSONArray arr = null, arr2 = null, arr3 = null;
+    JSONArray arr = null;
     private Boolean Isinternetpresent = false;
     ConnectionDetector cd;
     private String urlParameters;
     ProgressDialog dialog, dialog1;
-    String id,lat,lang;
+
     RecyclerView recylcesubcat, recylceprodlist;
-    String subcat;
-    ArrayList<Integer> totalcartvalues = new ArrayList<>();
-    private List<ShoppingCartResults> mCartList;
-    DbHelper helper;
     Double subTotal = 0.0;
-    TextView totalval;
+    TextView totalvalTv;
     LinearLayout bottomLayout;
-    String qty = "1";
-    Button continu;
-    int tot, totalvalue = 0, totalqty;
-     ImageView noprod;
-    String range;
+    ImageView noprodImg;
+    String rangetext,subcattext,idtext,lattext,langtext;
     seekbarsession seekbarsession;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,48 +74,47 @@ public class Subcategory extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
              onBackPressed();
             }
         });
-      //  totalval = (TextView) findViewById(R.id.tot);
-     //   continu = (Button) findViewById(R.id.cont);
         Bundle extras = getIntent().getExtras();
-        id = extras.getString("categoryid");
-        lat=extras.getString("lat");
-        lang=extras.getString("lang");
+
+        idtext = extras.getString("categoryid");
+        lattext=extras.getString("lat");
+        langtext=extras.getString("lang");
+
         recylcesubcat = (RecyclerView) findViewById(R.id.subcat);
         recylceprodlist = (RecyclerView) findViewById(R.id.prodlist);
         bottomLayout = (LinearLayout) findViewById(R.id.bot);
-        noprod=(ImageView)findViewById(R.id.noprod);
+        noprodImg=(ImageView)findViewById(R.id.noprod);
+
         cd = new ConnectionDetector(getApplicationContext());
         Isinternetpresent = cd.isConnectingToInternet();
 
-        if (Isinternetpresent) {
+        if (Isinternetpresent)
+        {
 
             subcatvalues getsub = new subcatvalues();
-            getsub.execute("http://quotecp.com:444/api/topcategory/getsubcategorybyid/" + id);
+            getsub.execute("http://quotecp.com:444/api/topcategory/getsubcategorybyid/" + idtext);
             subcatwebapis();
 
 
-        } else {
+        } else
+        {
 
             Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
         }
-      /*  mCartList = helper.getResults();
-        for (ShoppingCartResults p : mCartList) {
-            int pricesql = p.getprice();
-            int qtysql = p.getqty();
-            subTotal += pricesql * qtysql;
-            totalcartvalues.add(qtysql);
-        }*/
-        if (subTotal > 1) {
+        if (subTotal > 1)
+        {
 
 
             bottomLayout.setVisibility(View.VISIBLE);
-            totalval.setVisibility(View.VISIBLE);
+            totalvalTv.setVisibility(View.VISIBLE);
         }
 
         try{
@@ -131,36 +124,30 @@ public class Subcategory extends AppCompatActivity {
             if (val == null)
             {
 
-                range="15";
+                rangetext="15";
             }else{
-                range = user1.get(seekbarsession.KEY_RANGE);
+                rangetext = user1.get(seekbarsession.KEY_RANGE);
             }
 
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        //  total.setText(String.valueOf(subTotal));
-/*
-        continu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent con = new Intent(Subcategory.this, Yourcart.class);
-                startActivity(con);
-            }
-        });*/
+
     }
 
 
-    public void subcatwebapis() {
+    public void subcatwebapis()
+    {
 
-        subcat = "0";
+        subcattext = "0";
         productvalues prdsub = new productvalues();
         prdsub.execute("http://quotecp.com:444/api/topcategory/getproductlistcategory");
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menuprodlist, menu);
 
@@ -168,7 +155,8 @@ public class Subcategory extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -180,15 +168,16 @@ public class Subcategory extends AppCompatActivity {
         if (id == R.id.addcat)
         {
 
-            Intent in1 = new Intent(Subcategory.this, Yourcart.class);
-            startActivity(in1);
+            Intent addcategory = new Intent(Subcategory.this, Yourcart.class);
+            startActivity(addcategory);
             return true;
         }
 
 
         return super.onOptionsItemSelected(item);
     }
-    private class subcatvalues extends AsyncTask<String, String, List<getsubcategory>> {
+    private class subcatvalues extends AsyncTask<String, String, List<getsubcategory>>
+    {
 
 
         @Override
@@ -206,16 +195,11 @@ public class Subcategory extends AppCompatActivity {
 
             try {
 
-                //  urlParameters = id;
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
 
-                //   DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                // wr.writeBytes(urlParameters);
-                //  wr.flush();
-                //   wr.close();
                 InputStream stream = connection.getInputStream();
 
 
@@ -225,7 +209,8 @@ public class Subcategory extends AppCompatActivity {
 
                 String line = "";
 
-                while ((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null)
+                {
 
                     buffer.append(line + "\n");
 
@@ -237,15 +222,16 @@ public class Subcategory extends AppCompatActivity {
                 List<getsubcategory> itemModelList1 = new ArrayList<>();
 
                 arr = new JSONArray(finalJson);
-                for (int i = 0; i < arr.length(); i++) {
+                for (int i = 0; i < arr.length(); i++)
+                {
                     JSONObject obj = arr.getJSONObject(i);
-                    getsubcategory model1 = new getsubcategory();
-                    if (obj != null && arr.length() > 0) {
-
-                        model1.setId(obj.getString("SubCategoryID"));
-                        model1.setName(obj.getString("Name"));
-                        model1.setThumbnailUrl(obj.getString("Image"));
-                        itemModelList1.add(model1);
+                    getsubcategory subcatval= new getsubcategory();
+                    if (obj != null && arr.length() > 0)
+                    {
+                        subcatval.setId(obj.getString("SubCategoryID"));
+                        subcatval.setName(obj.getString("Name"));
+                        subcatval.setThumbnailUrl(obj.getString("Image"));
+                        itemModelList1.add(subcatval);
                     }
                 }
 
@@ -253,17 +239,23 @@ public class Subcategory extends AppCompatActivity {
                 return itemModelList1;
 
 
-            } catch (MalformedURLException e) {
+            } catch (MalformedURLException e)
+            {
                 e.printStackTrace();
-            } catch (ProtocolException e) {
+            } catch (ProtocolException e)
+            {
                 e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
+            } catch (UnsupportedEncodingException e)
+            {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
                 e.printStackTrace();
-            } catch (NullPointerException e) {
+            } catch (NullPointerException e)
+            {
                 e.printStackTrace();
             }
 
@@ -272,21 +264,23 @@ public class Subcategory extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(List<getsubcategory> detailsModels1) {
+        protected void onPostExecute(List<getsubcategory> subcategory) {
 
-            super.onPostExecute(detailsModels1);
+            super.onPostExecute(subcategory);
 //
-            if (detailsModels1 != null && detailsModels1.size() > 0) {
-                System.out.println("det1-" + detailsModels1);
+            if (subcategory != null && subcategory.size() > 0)
+            {
                 recylcesubcat = (RecyclerView) findViewById(R.id.subcat);
                 LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext()/*, LinearLayoutManager.VERTICAL, false*/);
                 linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recylcesubcat.setLayoutManager(linearLayoutManager1);
                 recylcesubcat.setHasFixedSize(true);
-                Subcategory_adapter rcAda = new Subcategory_adapter(getApplicationContext(), detailsModels1);
+                Subcategory_adapter rcAda = new Subcategory_adapter(getApplicationContext(), subcategory);
                 recylcesubcat.setAdapter(rcAda);
                 dialog.dismiss();
-            }else{
+            }
+            else
+            {
 
                 dialog.dismiss();
             }
@@ -315,11 +309,11 @@ public class Subcategory extends AppCompatActivity {
 
             try {
 
-                urlParameters = "&lati=" + URLEncoder.encode(lat, "UTF-8") +
-                        "&longi=" + URLEncoder.encode(lang, "UTF-8") +
-                        "&range=" + URLEncoder.encode(range, "UTF-8") +
-                        "&categoryid=" + URLEncoder.encode(id, "UTF-8") +
-                        "&subcategoryid=" + URLEncoder.encode(subcat, "UTF-8");
+                urlParameters = "&lati=" + URLEncoder.encode(lattext, "UTF-8") +
+                        "&longi=" + URLEncoder.encode(langtext, "UTF-8") +
+                        "&range=" + URLEncoder.encode(rangetext, "UTF-8") +
+                        "&categoryid=" + URLEncoder.encode(idtext, "UTF-8") +
+                        "&subcategoryid=" + URLEncoder.encode(subcattext, "UTF-8");
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
@@ -402,15 +396,15 @@ public class Subcategory extends AppCompatActivity {
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recylceprodlist.setLayoutManager(linearLayoutManager);
                 recylceprodlist.setHasFixedSize(true);
-                noprod.setVisibility(View.GONE);
-                prodlist_adapter rcAda = new prodlist_adapter(getApplicationContext(), detailsModels1);
+                noprodImg.setVisibility(View.GONE);
+                ProductlistAdapter rcAda = new ProductlistAdapter(getApplicationContext(), detailsModels1);
                 recylceprodlist.setAdapter(rcAda);
                 dialog1.dismiss();
             } else {
 
 
                 recylceprodlist.setAdapter(null);
-                noprod.setVisibility(View.VISIBLE);
+                noprodImg.setVisibility(View.VISIBLE);
                 dialog1.dismiss();
             }
 
@@ -471,7 +465,7 @@ public class Subcategory extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        subcat = subcatid1.getText().toString();
+                        subcattext = subcatid1.getText().toString();
                         productvalues prdsub = new productvalues();
                         prdsub.execute("http://quotecp.com:444/api/topcategory/getproductlistcategory");
 
@@ -483,171 +477,6 @@ public class Subcategory extends AppCompatActivity {
 
     }
 
-    public class prodlist_adapter extends RecyclerView.Adapter<prodlist_adapter.ViewHolder>
 
-    {
-        private List<prodlist> itemList;
-        private Context context;
-        DbHelper helper;
-        int total;
-
-        public prodlist_adapter(Context context, List<prodlist> itemList) {
-            this.context = context;
-            this.itemList = itemList;
-            helper = new DbHelper(context);
-        }
-
-
-        @Override
-        public prodlist_adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View layoutview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_prodctlist, parent, false);
-            prodlist_adapter.ViewHolder prod = new prodlist_adapter.ViewHolder(layoutview);
-            return prod;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.id.setText(itemList.get(position).getid());
-            holder.name.setText(itemList.get(position).getName());
-            holder.shopname.setText(itemList.get(position).getShopname());
-            holder.price.setText(itemList.get(position).getprice() + "");
-            holder.pimagetext.setText(itemList.get(position).getThumbnailUrl());
-            holder.vendorqty.setText(itemList.get(position).getVendorQty());
-            Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.prodimg);
-
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return this.itemList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView name, id, price, shopname, pimagetext,vendorqty;
-            ImageView prodimg, checkin, checkout;
-            Integer pricevalue,vendorquant;
-
-
-            public ViewHolder(View itemView) {
-
-                super(itemView);
-
-                prodimg = (ImageView) itemView.findViewById(R.id.prodimg);
-                name = (TextView) itemView.findViewById(R.id.prodname);
-                id = (TextView) itemView.findViewById(R.id.pid);
-                shopname = (TextView) itemView.findViewById(R.id.shopname);
-                price = (TextView) itemView.findViewById(R.id.sellprice);
-                checkin = (ImageView) itemView.findViewById(R.id.checkin);
-                checkout = (ImageView) itemView.findViewById(R.id.checkout);
-                vendorqty = (TextView) itemView.findViewById(R.id.vendorqty);
-                pimagetext = (TextView) itemView.findViewById(R.id.prdimage);
-
-               /* mCartList = helper.getResults();
-                if (mCartList != null) {
-
-                    for (ShoppingCartResults p : mCartList) {
-                        int pricesql = p.getprice();
-                        int qtysql = p.getqty();
-                       // subTotal += pricesql * 1;
-                       // totalqty += subTotal;
-                        //totalval.setText(totalqty + "");
-                    }
-
-                }*/
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String shopprdid = id.getText().toString();
-                        Intent in = new Intent(view.getContext(), ProductDetails.class);
-                        in.putExtra("shopprdid", shopprdid);
-                        in.putExtra("qty", "1");
-                        in.putExtra("pimage", pimagetext.getText().toString());
-
-                        view.getContext().startActivity(in);
-
-
-                    }
-                });
-
-                checkin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                          /*  mCartList = helper.getResults();
-                            for (ShoppingCartResults p : mCartList) {
-                                int pricesql = p.getprice();
-                                int qtysql = p.getqty();
-                                subTotal += pricesql * qtysql;
-                                totalqty+=qtysql;
-                                totalcartvalues.add(qtysql);*/
-
-
-                        //   }
-
-
-                        Intent incheck = new Intent(v.getContext(), Checkin.class);
-                        incheck.putExtra("shoppid", id.getText().toString());
-                        incheck.putExtra("shopid","0");
-                        v.getContext().startActivity(incheck);
-
-                    }
-                });
-                checkout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                     /*   {
-                            mCartList = helper.getResults();
-                            if (mCartList != null) {
-                                for (ShoppingCartResults p : mCartList) {
-                                    int pricesql = p.getprice();
-                                    int qtysql = p.getqty();
-                                    subTotal += pricesql * 1;
-
-                                    totalqty += subTotal;
-                                    totalval.setText(totalqty + "");
-                                }
-                            }else{
-                                int priceval = Integer.parseInt(price.getText().toString());
-                                tot = priceval * 1;
-                                totalvalue = totalvalue + tot;
-
-                                totalval.setText(String.valueOf(totalvalue + ""));
-
-
-                            }
-
-                           *//* int priceval = Integer.parseInt(price.getText().toString());
-                            tot = priceval * 1;
-                            totalvalue = totalvalue + tot;
-
-                            totalval.setText(String.valueOf(totalvalue + ""));*//*
-                        }
-*/
-
-                        boolean value = helper.CheckIsDataAlreadyInDBorNot(id.getText().toString());
-                        if (value != true) {
-                            pricevalue = Integer.parseInt(price.getText().toString());
-                            String pimageval = pimagetext.getText().toString();
-                            vendorquant= Integer.parseInt(vendorqty.getText().toString());
-                            System.out.println("subvendq--"+vendorquant);
-                            helper.insert(id.getText().toString(), 1, pricevalue,vendorquant, name.getText().toString(), pimageval, shopname.getText().toString());
-                            Toast.makeText(Subcategory.this, "success", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            Toast.makeText(Subcategory.this, "Already Exists", Toast.LENGTH_SHORT).show();
-                        }
-
-                        //Toast.makeText(Subcategory.this,"already exists",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
-
-    }
 
 }

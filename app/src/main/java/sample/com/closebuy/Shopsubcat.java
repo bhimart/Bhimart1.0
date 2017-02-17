@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapters.DbHelper;
+import Adapters.ProductlistAdapter;
 import pojo.getshopproduct;
 import pojo.getshopsubcat;
 import pojo.getsubcategory;
@@ -47,13 +48,13 @@ import pojo.prodlist;
 public class Shopsubcat extends AppCompatActivity {
     String id;
     RecyclerView recylceshopsubcat,shoprecylceprodlist;
-    JSONArray arr = null, arr2 = null, arr3 = null;
+    JSONArray arr = null;
     private Boolean Isinternetpresent = false;
     ConnectionDetector cd;
     private String urlParameters;
     ProgressDialog dialog, dialog1;
-    String subcat;
-    ImageView noprod;
+    String subcattext;
+    ImageView noproductImg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,17 +65,21 @@ public class Shopsubcat extends AppCompatActivity {
         id = extras.getString("shopid");
         recylceshopsubcat = (RecyclerView) findViewById(R.id.shopsubcat);
         shoprecylceprodlist= (RecyclerView) findViewById(R.id.shopprodlist);
-        noprod=(ImageView)findViewById(R.id.noprod);
+        noproductImg = (ImageView)findViewById(R.id.noprod);
+
         cd = new ConnectionDetector(getApplicationContext());
         Isinternetpresent = cd.isConnectingToInternet();
 
-        if (Isinternetpresent) {
+        if (Isinternetpresent)
+        {
 
             shopsubcatvalues getsub = new shopsubcatvalues();
+            /* To get shop subcategory */
             getsub.execute("http://quotecp.com:444/api/ShopProductDetails/GetShopSubCategory/" + id);
-            // subcatwebapis();
-            subcat = "0";
+
+            subcattext = "0";
             shopproductvalues prdsub = new shopproductvalues();
+            /*TO get productdetails*/
             prdsub.execute("http://quotecp.com:444/api/ShopProductDetails");
 
         } else {
@@ -101,16 +106,12 @@ public class Shopsubcat extends AppCompatActivity {
 
             try {
 
-                //  urlParameters = id;
+
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
 
-                //   DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                // wr.writeBytes(urlParameters);
-                //  wr.flush();
-                //   wr.close();
                 InputStream stream = connection.getInputStream();
 
 
@@ -168,18 +169,18 @@ public class Shopsubcat extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(List<getshopsubcat> detailsModels1) {
+        protected void onPostExecute(List<getshopsubcat> shopsubcategory) {
 
-            super.onPostExecute(detailsModels1);
+            super.onPostExecute(shopsubcategory);
 //
-            if (detailsModels1 != null && detailsModels1.size() > 0) {
-                System.out.println("det1-" + detailsModels1);
+            if (shopsubcategory != null && shopsubcategory.size() > 0) {
+                System.out.println("det1-" + shopsubcategory);
                 recylceshopsubcat = (RecyclerView) findViewById(R.id.shopsubcat);
                 LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext()/*, LinearLayoutManager.VERTICAL, false*/);
                 linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recylceshopsubcat.setLayoutManager(linearLayoutManager1);
                 recylceshopsubcat.setHasFixedSize(true);
-                Shopsubcategory_adapter rcAda = new Shopsubcategory_adapter(getApplicationContext(), detailsModels1);
+                Shopsubcategory_adapter rcAda = new Shopsubcategory_adapter(getApplicationContext(), shopsubcategory);
                 recylceshopsubcat.setAdapter(rcAda);
                 dialog.dismiss();
             } else {
@@ -199,7 +200,8 @@ public class Shopsubcat extends AppCompatActivity {
         private Context context;
 
 
-        public Shopsubcategory_adapter(Context context, List<getshopsubcat> itemList) {
+        public Shopsubcategory_adapter(Context context, List<getshopsubcat> itemList)
+        {
             this.context = context;
             this.itemList = itemList;
         }
@@ -244,7 +246,7 @@ public class Shopsubcat extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                          subcat = subcatid1.getText().toString();
+                          subcattext = subcatid1.getText().toString();
                          shopproductvalues prdsub = new shopproductvalues();
                           prdsub.execute("http://quotecp.com:444/api/ShopProductDetails");
 
@@ -256,7 +258,7 @@ public class Shopsubcat extends AppCompatActivity {
 
     }
 
-    private class shopproductvalues extends AsyncTask<String, String, List<getshopproduct>> {
+    private class shopproductvalues extends AsyncTask<String, String, List<prodlist>> {
 
 
         @Override
@@ -267,7 +269,7 @@ public class Shopsubcat extends AppCompatActivity {
         }
 
         @Override
-        protected List<getshopproduct> doInBackground(String... urls) {
+        protected List<prodlist> doInBackground(String... urls) {
             URL url;
             HttpURLConnection connection = null;
             BufferedReader reader = null;
@@ -275,7 +277,7 @@ public class Shopsubcat extends AppCompatActivity {
             try {
 
                 urlParameters = "&ShopID=" + URLEncoder.encode(id, "UTF-8") +
-                          "&SubCategoryID=" + URLEncoder.encode(subcat, "UTF-8");
+                          "&SubCategoryID=" + URLEncoder.encode(subcattext, "UTF-8");
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
@@ -306,21 +308,21 @@ public class Shopsubcat extends AppCompatActivity {
                 String finalJson = buffer.toString();
 
 
-                List<getshopproduct> itemModelList1 = new ArrayList<>();
+                List<prodlist> itemModelList1 = new ArrayList<>();
 
                 arr = new JSONArray(finalJson);
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    getshopproduct model1 = new getshopproduct();
+                    prodlist shoproduct = new prodlist();
                     if (obj != null && arr.length() > 0) {
 
-                        model1.setId(obj.getString("ShopProductID"));
-                        model1.setName(obj.getString("ProductName"));
-                        model1.setShopname(obj.getString("ShopName"));
-                        model1.setPrice(obj.getString("Price"));
-                        model1.setThumbnailUrl(obj.getString("Image"));
-                        model1.setVendorQty(obj.getString("VendorQty"));
-                        itemModelList1.add(model1);
+                        shoproduct.setId(obj.getString("ShopProductID"));
+                        shoproduct.setName(obj.getString("ProductName"));
+                        shoproduct.setShopname(obj.getString("ShopName"));
+                        shoproduct.setPrice(obj.getString("Price"));
+                        shoproduct.setThumbnailUrl(obj.getString("Image"));
+                        shoproduct.setVendorQty(obj.getString("VendorQty"));
+                        itemModelList1.add(shoproduct);
                     }
                 }
 
@@ -345,7 +347,7 @@ public class Shopsubcat extends AppCompatActivity {
             return null;
         }
         @Override
-        protected void onPostExecute(List<getshopproduct> detailsModels1) {
+        protected void onPostExecute(List<prodlist> detailsModels1) {
 
             super.onPostExecute(detailsModels1);
 //
@@ -356,140 +358,24 @@ public class Shopsubcat extends AppCompatActivity {
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 shoprecylceprodlist.setLayoutManager(linearLayoutManager);
                 shoprecylceprodlist.setHasFixedSize(true);
-                noprod.setVisibility(View.GONE);
-                shopprodlist_adapter rcAda = new shopprodlist_adapter(getApplicationContext(), detailsModels1);
+                noproductImg.setVisibility(View.GONE);
+                ProductlistAdapter rcAda = new ProductlistAdapter(getApplicationContext(), detailsModels1);
                 shoprecylceprodlist.setAdapter(rcAda);
                 dialog1.dismiss();
             } else {
 
 
                 shoprecylceprodlist.setAdapter(null);
-                noprod.setVisibility(View.VISIBLE);
+                noproductImg.setVisibility(View.VISIBLE);
                 dialog1.dismiss();
             }
 
 //dialog.dismiss();
         }
     }
-    public class shopprodlist_adapter extends RecyclerView.Adapter<shopprodlist_adapter.ViewHolder>
-
-    {
-        private List<getshopproduct> itemList;
-        private Context context;
-        DbHelper helper;
-        int total;
-
-        public shopprodlist_adapter(Context context, List<getshopproduct> itemList) {
-            this.context = context;
-            this.itemList = itemList;
-            helper = new DbHelper(context);
-        }
-
-
-        @Override
-        public shopprodlist_adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View layoutview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_shopprodlist, parent, false);
-            ViewHolder prod = new ViewHolder(layoutview);
-            return prod;
-        }
-
-        @Override
-        public void onBindViewHolder(shopprodlist_adapter.ViewHolder holder, int position) {
-            holder.id.setText(itemList.get(position).getid());
-            holder.name.setText(itemList.get(position).getName());
-            holder.shopname.setText(itemList.get(position).getShopname());
-            holder.price.setText(itemList.get(position).getprice() + "");
-            holder.pimagetext.setText(itemList.get(position).getThumbnailUrl());
-            holder.vendorqty.setText(itemList.get(position).getVendorQty());
-            Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.prodimg);
-
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return this.itemList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView name, id, price, shopname, pimagetext,vendorqty;
-            ImageView prodimg, checkin, checkout;
-            Integer pricevalue,vendorquant;
-
-
-            public ViewHolder(View itemView) {
-
-                super(itemView);
-
-                prodimg = (ImageView) itemView.findViewById(R.id.prodimg);
-                name = (TextView) itemView.findViewById(R.id.prodname);
-                id = (TextView) itemView.findViewById(R.id.pid);
-                shopname = (TextView) itemView.findViewById(R.id.shopname);
-                price = (TextView) itemView.findViewById(R.id.sellprice);
-                checkin = (ImageView) itemView.findViewById(R.id.checkin);
-                checkout = (ImageView) itemView.findViewById(R.id.checkout);
-                vendorqty = (TextView) itemView.findViewById(R.id.vendorqty);
-                pimagetext = (TextView) itemView.findViewById(R.id.prdimage);
-
-
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String shopprdid = id.getText().toString();
-                        Intent in = new Intent(view.getContext(), ProductDetails.class);
-                        in.putExtra("shopprdid", shopprdid);
-                        in.putExtra("qty", "1");
-                        in.putExtra("pimage", pimagetext.getText().toString());
-
-                        view.getContext().startActivity(in);
-
-
-                    }
-                });
-
-                checkin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-
-
-
-                        Intent incheck = new Intent(v.getContext(), Checkin.class);
-                        incheck.putExtra("shoppid", id.getText().toString());
-                        incheck.putExtra("shopid","0");
-                        v.getContext().startActivity(incheck);
-
-                    }
-                });
-                checkout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        boolean value = helper.CheckIsDataAlreadyInDBorNot(id.getText().toString());
-                        if (value != true) {
-                            pricevalue = Integer.parseInt(price.getText().toString());
-                            String pimageval = pimagetext.getText().toString();
-                            vendorquant= Integer.parseInt(vendorqty.getText().toString());
-                            System.out.println("subvendq--"+vendorquant);
-                            helper.insert(id.getText().toString(), 1, pricevalue,vendorquant, name.getText().toString(), pimageval, shopname.getText().toString());
-                            Toast.makeText(Shopsubcat.this, "success", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            Toast.makeText(Shopsubcat.this, "Already Exists", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-            }
-        }
 
     }
 
 
 
-}
+

@@ -48,20 +48,20 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
     RecyclerView recyclecart;
     LoginSessionManager loginSessionManager;
     int fulltotalprice1 = 0, fulltotalprice2=0;
-    TextView totalprice1;
+
+    TextView totalpriceTv;
+
     ProgressDialog dialog;
     JSONArray arr = null;
     ConnectionDetector cd;
-    private Boolean Isinternetpresent = false;
-    private String urlParameters;
-    private List<String>lstshopprodid = null;
-    private List<String> lstunitprice = null;
-    private List<String> lstqty = null;
-    private List<String> lstprdtprice = null;
-    String Customerid="1";
-     String  totalvaluesprd;
-      Button order;
-    String cspid,cup,cqty,cptp;
+
+    private List<String> listshopProductid   = null;
+    private List<String> listUnitPrice =  null;
+    private List<String> listQuantity  =  null;
+    private List<String> lstprdtprice  =  null;
+
+    String  overalltotaltext;
+    Button orderbt;
     LinearLayout lin;
     ImageView noprod;
 
@@ -72,29 +72,16 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclecart = (RecyclerView) findViewById(R.id.cartrecycle);
-        totalprice1 = (TextView) findViewById(R.id.tot);
-        order=(Button)findViewById(R.id.order);
+        totalpriceTv = (TextView) findViewById(R.id.tot);
+        orderbt=(Button)findViewById(R.id.order);
         lin=(LinearLayout) findViewById(R.id.linval);
         noprod=(ImageView)findViewById(R.id.novalues);
-        //  recyclevaalue();
+
+        orderbt.setOnClickListener(this);
+
 
         cart cartval = new cart();
         cartval.execute();
-
-
-        order.setOnClickListener(this);
-
-      /*  order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-                }
-
-
-        });*/
-
 
 
 
@@ -110,15 +97,16 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
             Intent in=new Intent(Yourcart.this,signlogin.class);
             startActivity(in);
 
-        }else{
+        }else
+        {
 
 
             Intent in=new Intent(Yourcart.this,Orderpage.class);
-            in.putExtra("lstshpid",lstshopprodid.toString());
-            in.putExtra("lstuniprice",lstunitprice.toString());
-            in.putExtra("lstqty",lstqty.toString());
+            in.putExtra("lstshpid",listshopProductid .toString());
+            in.putExtra("lstuniprice",listUnitPrice.toString());
+            in.putExtra("lstqty",listQuantity.toString());
             in.putExtra("lsteachptotal",lstprdtprice.toString());
-            in.putExtra("overalltotal",totalvaluesprd);
+            in.putExtra("overalltotal",overalltotaltext);
             startActivity(in);
 
 
@@ -145,10 +133,10 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
                 dbHelper = new DbHelper(Yourcart.this);
                 mCartList = dbHelper.getResults();
 
-                lstshopprodid = new ArrayList<>();
+                listshopProductid  = new ArrayList<>();
                 lstprdtprice = new ArrayList<>();
-                lstunitprice = new ArrayList<>();
-                lstqty = new ArrayList<>();
+                listUnitPrice = new ArrayList<>();
+                listQuantity = new ArrayList<>();
 
 
                 List<cartvalues> itemModelList = new ArrayList<>();
@@ -158,9 +146,9 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
                     int totalprice = p.getprice() * p.getqty();
                     fulltotalprice1 = fulltotalprice1 + totalprice;
                     fulltotalprice2=fulltotalprice1;
-                    lstshopprodid.add(p.getid());
-                    lstunitprice.add(String.valueOf(p.getprice()));
-                    lstqty.add(String.valueOf(p.getqty()));
+                    listshopProductid .add(p.getid());
+                    listUnitPrice.add(String.valueOf(p.getprice()));
+                    listQuantity.add(String.valueOf(p.getqty()));
                     lstprdtprice.add(String.valueOf(totalprice));
 
 
@@ -180,8 +168,8 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void run() {
 
-                            totalprice1.setText(fulltotalprice1 + "");
-                            totalvaluesprd=totalprice1.getText().toString();
+                            totalpriceTv.setText(fulltotalprice1 + "");
+                            overalltotaltext=totalpriceTv.getText().toString();
                         }
                     });
 
@@ -201,12 +189,12 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
 
             super.onPostExecute(detailsModels);
             dialog.dismiss();
-            if (detailsModels != null && detailsModels.size() > 0) {
+            if (detailsModels != null && detailsModels.size() > 0)
+            {
                 noprod.setVisibility(View.GONE);
                 lin.setVisibility(View.VISIBLE);
-                order.setVisibility(View.VISIBLE);
+                orderbt.setVisibility(View.VISIBLE);
                 recyclecart = (RecyclerView) findViewById(R.id.cartrecycle);
-                //  Recycleviewhome rcAdapter = new Recycleviewhome(getApplicationContext(), rowListItem)
                 recyclecart.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
                 recyclecart.setHasFixedSize(true);
                 cartval rcAdapter = new cartval(Yourcart.this, detailsModels);
@@ -216,7 +204,7 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
 
                 noprod.setVisibility(View.VISIBLE);
                 lin.setVisibility(View.GONE);
-                order.setVisibility(View.GONE);
+                orderbt.setVisibility(View.GONE);
             }
         }
 
@@ -313,8 +301,8 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
                        fulltotalprice2 += tot1;
                        System.out.println("full---" + fulltotalprice1);
 
-                       totalprice1.setText(fulltotalprice2 + "");
-                       totalvaluesprd = totalprice1.getText().toString();
+                       totalpriceTv.setText(fulltotalprice2 + "");
+                       overalltotaltext = totalpriceTv.getText().toString();
                    }else{
 
                        Toast.makeText(v.getContext(),"Exceeds Stock Limit", Toast.LENGTH_SHORT).show();
@@ -334,8 +322,8 @@ public class Yourcart extends AppCompatActivity implements View.OnClickListener{
                         prdtotal.setText(tot + "");
                         fulltotalprice2 -= tot1;
                         System.out.println("full---" + fulltotalprice1);
-                        totalprice1.setText(fulltotalprice2+"");
-                        totalvaluesprd=totalprice1.getText().toString();
+                        totalpriceTv.setText(fulltotalprice2+"");
+                        overalltotaltext=totalpriceTv.getText().toString();
                     } else {
 
                         qty.setText("1");

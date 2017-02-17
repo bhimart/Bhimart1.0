@@ -44,8 +44,10 @@ import java.util.List;
 
 
 import Adapters.DbHelper;
+import Adapters.ProductlistAdapter;
 import pojo.ProductModel;
 import pojo.ShoppingCartResults;
+import pojo.prodlist;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -123,10 +125,11 @@ public class SearchActivity extends AppCompatActivity {
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 15;
 
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
                 progressChanged = progress;
                 seekbarMinvalueTv.setText(String.valueOf(progressChanged));
-                autosuggest autos = new autosuggest();
+                Autosuggestproduct autos = new Autosuggestproduct();
                 rangetext = seekbarMinvalueTv.getText().toString();
                 autos.execute("http://quotecp.com:444/api/ProductSearch");
             }
@@ -160,7 +163,7 @@ public class SearchActivity extends AppCompatActivity {
             if(s.length() >= 3)
             {
                 searchtext= searchtv.getText().toString();
-                autosuggest autos = new autosuggest();
+                Autosuggestproduct autos = new Autosuggestproduct();
                 rangetext = "7";
                 autos.execute("http://quotecp.com:444/api/ProductSearch");
                 seekbar.setVisibility(View.VISIBLE);
@@ -176,7 +179,8 @@ public class SearchActivity extends AppCompatActivity {
         }
     };
 
-    private class autosuggest extends AsyncTask<String, String, List<ProductModel>> {
+    private class Autosuggestproduct extends AsyncTask<String, String, List<prodlist>>
+    {
 
 
         @Override
@@ -185,7 +189,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<ProductModel> doInBackground(String... urls) {
+        protected List<prodlist> doInBackground(String... urls) {
             URL url;
             HttpURLConnection connection = null;
             BufferedReader reader = null;
@@ -202,6 +206,7 @@ public class SearchActivity extends AppCompatActivity {
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type",
                         "application/x-www-form-urlencoded");
+
                 connection.setUseCaches(false);
                 connection.setDoInput(true);
                 connection.setDoOutput(true);
@@ -226,12 +231,12 @@ public class SearchActivity extends AppCompatActivity {
 
                 String finalJson = buffer.toString();
 
-                List<ProductModel> itemModelList1 = new ArrayList<>();
+                List<prodlist> itemModelList1 = new ArrayList<>();
 
                 arr = new JSONArray(finalJson);
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    ProductModel modelproduct = new ProductModel();
+                    prodlist modelproduct = new prodlist();
                     if (obj != null && arr.length() > 0)
                     {
                         modelproduct.setId(obj.getString("ShopProductID"));
@@ -267,21 +272,24 @@ public class SearchActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(List<ProductModel> detailsModels1) {
+        protected void onPostExecute(List<prodlist> suggestproduct) {
 
-            super.onPostExecute(detailsModels1);
+            super.onPostExecute(suggestproduct);
 
-            if (detailsModels1 != null && detailsModels1.size() > 0) {
-                System.out.println("det1-" + detailsModels1);
+            if (suggestproduct != null && suggestproduct.size() > 0)
+            {
+
                 recyclarviewProduct = (RecyclerView) findViewById(R.id.productlistrv);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext()/*, LinearLayoutManager.VERTICAL, false*/);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclarviewProduct.setLayoutManager(linearLayoutManager);
                 recyclarviewProduct.setHasFixedSize(true);
-                ProductAdapter rcAda = new ProductAdapter(getApplicationContext(), detailsModels1);
-                recyclarviewProduct.setAdapter(rcAda);
+                ProductlistAdapter productvalues = new ProductlistAdapter(getApplicationContext(), suggestproduct);
+                recyclarviewProduct.setAdapter(productvalues);
                 
-            }else{
+            }
+            else
+            {
 
                 recyclarviewProduct.setAdapter(null);
 
@@ -294,14 +302,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    private class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
+   /* private class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
 
     {
         private List<ProductModel> itemList;
         private Context context;
         DbHelper helper;
 
-        public ProductAdapter(Context context, List<ProductModel> itemList) {
+        public ProductAdapter(Context context, List<prodlist> itemList) {
             this.context = context;
             this.itemList = itemList;
             helper = new DbHelper(context);
@@ -417,7 +425,7 @@ public class SearchActivity extends AppCompatActivity {
                 });
             }
         }
-    }
+    }*/
 }
 
 

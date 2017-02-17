@@ -44,8 +44,8 @@ public class Topdadd extends RecyclerView.Adapter<Topdadd.ViewHolder>
     @Override
     public void onBindViewHolder(Topdadd.ViewHolder holder, int position)
     {
-        holder.id.setText(itemList.get(position).getId());
-        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.icon);
+        holder.AddidTv.setText(itemList.get(position).getId());
+        Glide.with(context).load(itemList.get(position).getThumbnailUrl()).into(holder.iconImg);
     }
 
     @Override
@@ -57,16 +57,16 @@ public class Topdadd extends RecyclerView.Adapter<Topdadd.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView name,id;
-        ImageView icon;
+        TextView AddidTv;
+        ImageView iconImg;
 
         public ViewHolder(View itemView)
         {
 
             super(itemView);
 
-            icon = (ImageView) itemView.findViewById(R.id.add);
-            id   = (TextView) itemView.findViewById(R.id.idvalue);
+            iconImg = (ImageView) itemView.findViewById(R.id.add);
+            AddidTv   = (TextView) itemView.findViewById(R.id.idvalue);
 
 
             itemView.setOnClickListener(new View.OnClickListener()
