@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,66 +16,72 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
 import SessionManager.LoginSessionManager;
 
-public class Profiledetails extends AppCompatActivity {
+public class ProfileDetails extends AppCompatActivity
+{
+
     ConnectionDetector cd;
     final Context context = this;
     private Boolean isInternetPresent = false;
-    private String urlParameters;
     ProgressDialog dialog;
-    JSONArray arr = null;
-    String uid;
+    JSONArray array = null;
+
     LoginSessionManager loginSessionManager;
-    TextView name,mobile,mailid,dob,gender;
-    ImageView profilepic;
-    Button edit;
-    String img;
-    String state;
-    String customerid;
+
+    TextView usernameTv,mobileTv,mailidTv,dobTv,genderTv;
+    ImageView profilepicImg;
+
+    Button editBt;
+    String userimgtext,customeridtext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiledetails);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        name=(TextView)findViewById(R.id.uname);
-        profilepic=(ImageView)findViewById(R.id.nav_prof_img_id);
-        mobile=(TextView)findViewById(R.id.pno);
-        mailid=(TextView)findViewById(R.id.mailid1);
-        dob=(TextView)findViewById(R.id.dob);
-        edit=(Button)findViewById(R.id.edit);
-        gender=(TextView)findViewById(R.id.gender);
-        try {
+        
+        usernameTv = (TextView)findViewById(R.id.username);
+        profilepicImg = (ImageView)findViewById(R.id.nav_prof_img_id);
+        mobileTv   = (TextView)findViewById(R.id.phone);
+        mailidTv   = (TextView)findViewById(R.id.mailid);
+        genderTv   = (TextView)findViewById(R.id.gender);
+        dobTv      = (TextView) findViewById(R.id.dob);
+
+        editBt      = (Button)findViewById(R.id.edit);
+
+        try
+        {
             loginSessionManager = new LoginSessionManager(getApplicationContext());
             HashMap<String, String> user = loginSessionManager.getUserDetails();
-            customerid = user.get(LoginSessionManager.KEY_ID);
-            if(loginSessionManager.checkLogin()){
+            customeridtext = user.get(LoginSessionManager.KEY_ID);
+            
+            if(loginSessionManager.checkLogin())
+            {
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setTitle("Your Details Are  Not Yet Registered");
                 alertDialogBuilder
                         .setMessage("Press Ok To Register your Details")
                         .setCancelable(false);
-                alertDialogBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+
+                alertDialogBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
                         Intent ix = new Intent(getApplicationContext(), signlogin.class);
 
                         ix.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -85,6 +89,7 @@ public class Profiledetails extends AppCompatActivity {
                         ix.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(ix);
                         finish();
+
                     }
                 }).setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -96,61 +101,74 @@ public class Profiledetails extends AppCompatActivity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
-            }else{
+            }
+            else
+            {
 
                 cd = new ConnectionDetector(getApplicationContext());
                 isInternetPresent = cd.isConnectingToInternet();
-                if (isInternetPresent) {
+                if (isInternetPresent) 
+                {
 
-                    profiledet tasku = new profiledet();
-                    tasku.execute("http://quotecp.com:444/api/Myprofile/Profile/" + customerid);
-
-
-
-                } else {
-                    // Toast.makeText(UserProfileActivity.this,"No Internet connection",Toast.LENGTH_SHORT).show();
-                    showAlertDialog(Profiledetails.this, "No Internet Connection", "You don't have internet connection.", false);
+                    ProfileData Detailstask = new ProfileData();
+                   
+                    /*api to get profile details*/
+                    Detailstask.execute("http://quotecp.com:444/api/Myprofile/Profile/" + customeridtext);
+                    
+                } 
+                else 
+                {
+                    showAlertDialog(ProfileDetails.this, "No Internet Connection", "You don't have internet connection.", false);
                 }
 
 
             }
 
-        }catch (NullPointerException e){
+        }catch (NullPointerException e)
+        {
             e.printStackTrace();
         }
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        editBt.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Intent ed=new Intent(Profiledetails.this,Edit_profile.class);
-                ed.putExtra("name",name.getText().toString());
-                ed.putExtra("ph",mobile.getText().toString());
-                ed.putExtra("dob",dob.getText().toString());
-                ed.putExtra("mail",mailid.getText().toString());
-                ed.putExtra("gender",gender.getText().toString());
-                ed.putExtra("image",img);
-                startActivity(ed);
+            public void onClick(View v)
+            {
+               
+                Intent editvalue=new Intent(ProfileDetails.this,Edit_profile.class);
+                editvalue.putExtra("name",usernameTv.getText().toString());
+                editvalue.putExtra("ph",mobileTv.getText().toString());
+                editvalue.putExtra("dob",dobTv.getText().toString());
+                editvalue.putExtra("mail",mailidTv.getText().toString());
+                editvalue.putExtra("gender",genderTv.getText().toString());
+                editvalue.putExtra("image",userimgtext);
+                
+                startActivity(editvalue);
             }
         });
     }
 
-    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+    public void showAlertDialog(Context context, String title, String message, Boolean status)
+    {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
-        //         alertDialog.setIcon((status) ? R.drawable.success : R.drawable.fail);
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
             }
         });
         alertDialog.show();
     }
-    public class profiledet extends AsyncTask<String, Void, String> {
+
+    public class ProfileData extends AsyncTask<String, Void, String> {
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
-            dialog = ProgressDialog.show(Profiledetails.this, "Loading",
+            dialog = ProgressDialog.show(ProfileDetails.this, "Loading",
                     "Please wait...", true);
             dialog.show();
 
@@ -158,7 +176,8 @@ public class Profiledetails extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... urls) {
+        protected String doInBackground(String... urls)
+        {
 
 
             URL url;
@@ -168,25 +187,17 @@ public class Profiledetails extends AppCompatActivity {
                 url = new URL(urls[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
-              /*  connection.setRequestProperty("Content-Type",
-                        "application/x-www-form-urlencoded");
-                connection.setUseCaches(false);
-                connection.setDoInput(true);
-                connection.setDoOutput(true);*/
-
-                //Send request
-                /*DataOutputStream wr = new DataOutputStream(
-                        connection.getOutputStream());
-                wr.writeBytes(urlParameters);
-                wr.flush();
-                wr.close();*/
+             
 
                 //Get Response
                 InputStream is = connection.getInputStream();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is));
                 String line;
                 StringBuffer response = new StringBuffer();
-                while ((line = rd.readLine()) != null) {
+               
+                while ((line = rd.readLine()) != null)
+                
+                {
                     response.append(line);
                     response.append('\r');
                 }
@@ -197,9 +208,11 @@ public class Profiledetails extends AppCompatActivity {
                 e.printStackTrace();
                 return null;
 
-            } finally {
+            } finally
+            {
 
-                if (connection != null) {
+                if (connection != null)
+                {
                     connection.disconnect();
                 }
             }
@@ -212,65 +225,33 @@ public class Profiledetails extends AppCompatActivity {
             try {
 
 
-                arr = new JSONArray(result);
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject obj = arr.getJSONObject(i);
+                array = new JSONArray(result);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
 
-                    if(obj!=null) {
-                        name.setText(obj.getString("Name"));
-                        mobile.setText(obj.getString("PhoneNumber"));
-                        mailid.setText(obj.getString("EmailID"));
-                        dob.setText(obj.getString("DOB"));
-                        gender.setText(obj.getString("Gender"));
-                        img = obj.getString("Image");
-                         Glide.with(Profiledetails.this)
-                                .load(img)
-                                .into(profilepic);
+                    if(obj!=null) 
+                    {
+                        usernameTv.setText(obj.getString("Name"));
+                        mobileTv.setText(obj.getString("PhoneNumber"));
+                        mailidTv.setText(obj.getString("EmailID"));
+                        dobTv.setText(obj.getString("DOB"));
+                        genderTv.setText(obj.getString("Gender"));
 
 
-                        // String state=obj.getString("status");
-                      /*  if(state.equalsIgnoreCase("0")){
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                                    context);
+                        userimgtext = obj.getString("Image");
 
-                            alertDialogBuilder.setTitle("Your Details Are  Not Yet Registered");
-                            alertDialogBuilder
-                                    .setMessage("Press Ok To Register your Details")
-                                    .setCancelable(false);
-                            alertDialogBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent ix = new Intent(getApplicationContext(), signlogin.class);
-
-                                    ix.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    ix.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    ix.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(ix);
-                                    finish();
-                                }
-                            }).setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    dialog.cancel();
-                                }
-                            });
-
-                            AlertDialog alertDialog = alertDialogBuilder.create();
-                            alertDialog.show();
-
-                        }*/
-
-                    }
-
-
-
-
-
-                    else {
+                        Glide.with(ProfileDetails.this)
+                                .load(userimgtext)
+                                .into(profilepicImg);
+                        
+                    } 
+                    else
+                    {
                         Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG).show();
-                        //       Toast.makeText(getApplicationContext(),"Please Try Again After Somtime",Toast.LENGTH_LONG).show();
                     }
                 }
-            }catch(JSONException e){
+            }catch(JSONException e)
+            {
                 e.printStackTrace();
             }
            dialog.dismiss();
