@@ -467,6 +467,7 @@ public class Subcategory extends AppCompatActivity {
 
                         subcattext = subcatid1.getText().toString();
                         productvalues prdsub = new productvalues();
+
                         prdsub.execute("http://quotecp.com:444/api/topcategory/getproductlistcategory");
 
                     }
